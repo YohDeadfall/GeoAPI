@@ -1,6 +1,8 @@
 ﻿using System;
+#if COMPAT_BOOTSTRAP_USING_REFLECTION && HAS_SYSTEM_APPDOMAIN_GETASSEMBLIES && HAS_SYSTEM_REFLECTION_ASSEMBLY_GETEXPORTEDTYPES
 using System.Reflection;
 using System.Reflection.Emit;
+#endif
 
 namespace GeoAPI
 {
@@ -68,7 +70,7 @@ namespace GeoAPI
                         foreach (var constructor in type.GetConstructors())
                         {
                             if (constructor.IsPublic && constructor.GetParameters().Length == 0)
-                                return _instance = instance = (IGeometryServices)Activator.CreateInstance(type);
+                                return _instance = (IGeometryServices)Activator.CreateInstance(type);
                         }
                     }
                 }
