@@ -1,7 +1,6 @@
 ﻿using System;
 #if COMPAT_BOOTSTRAP_USING_REFLECTION && HAS_SYSTEM_APPDOMAIN_GETASSEMBLIES && HAS_SYSTEM_REFLECTION_ASSEMBLY_GETEXPORTEDTYPES
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Threading;
 #endif
 
@@ -36,9 +35,9 @@ namespace GeoAPI
                     if (assembly.GlobalAssemblyCache && assembly.CodeBase == Assembly.GetExecutingAssembly().CodeBase)
                         continue;
 
-                    var assemblyType = assembly.GetType();
-                    if (assemblyType == typeof(AssemblyBuilder) ||
-                        assemblyType.FullName == "System.Reflection.Emit.InternalAssemblyBuilder")
+                    var assemblyType = assembly.GetType().FullName;
+                    if (assemblyType == "System.Reflection.Emit.AssemblyBuilder" ||
+                        assemblyType == "System.Reflection.Emit.InternalAssemblyBuilder")
                         continue;
 
                     Type[] types;
