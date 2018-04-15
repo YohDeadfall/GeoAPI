@@ -2,6 +2,7 @@
 #if COMPAT_BOOTSTRAP_USING_REFLECTION && HAS_SYSTEM_APPDOMAIN_GETASSEMBLIES && HAS_SYSTEM_REFLECTION_ASSEMBLY_GETEXPORTEDTYPES
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Threading;
 #endif
 
 namespace GeoAPI
@@ -11,30 +12,24 @@ namespace GeoAPI
     /// </summary>
     public static class GeometryServiceProvider
     {
-        private static volatile IGeometryServices _instance;
-        private static readonly object _lock = new object();
+        private static volatile IGeometryServices s_instance;
+        private static readonly object s_lock = new object();
 
         /// <summary>
         /// Gets or sets the <see cref="IGeometryServices"/> instance.
         /// </summary>
         public static IGeometryServices Instance
         {
-            get => _instance ?? InitializeInstance();
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-                lock (_lock)
-                    _instance = value;
-            }
+            get => s_instance ?? InitializeInstance();
+            set => s_instance = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         private static IGeometryServices InitializeInstance()
         {
 #if COMPAT_BOOTSTRAP_USING_REFLECTION && HAS_SYSTEM_APPDOMAIN_GETASSEMBLIES && HAS_SYSTEM_REFLECTION_ASSEMBLY_GETEXPORTEDTYPES
-            lock (_lock)
+            lock (s_lock)
             {
-                var instance = _instance;
+                var instance = s_instance;
                 if (instance != null) return instance;
                 foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
@@ -68,10 +63,11 @@ namespace GeoAPI
                             continue;
 
                         foreach (var constructor in type.GetConstructors())
-                        {
                             if (constructor.IsPublic && constructor.GetParameters().Length == 0)
-                                return _instance = (IGeometryServices)Activator.CreateInstance(type);
-                        }
+                            {
+                                Interlocked.CompareExchange(ref s_instance, (IGeometryServices)Activator.CreateInstance(type), null);
+                                return s_instance;
+                            }
                     }
                 }
             }
