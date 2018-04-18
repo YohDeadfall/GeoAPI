@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ADD926A0-1731-43C4-84F9-EF5B04B71A79}"
 EndProject
@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoAPI.CoordinateSystems", "src\GeoAPI.CoordinateSystems\GeoAPI.CoordinateSystems.csproj", "{D20D909C-67FB-4D17-ADC3-785ED79AFCFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoAPI.Benchmarks", "tests\GeoAPI.Benchmarks\GeoAPI.Benchmarks.csproj", "{2AFB49A0-E54A-4F71-AEC4-DD6847F8C61C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{D20D909C-67FB-4D17-ADC3-785ED79AFCFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D20D909C-67FB-4D17-ADC3-785ED79AFCFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D20D909C-67FB-4D17-ADC3-785ED79AFCFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AFB49A0-E54A-4F71-AEC4-DD6847F8C61C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AFB49A0-E54A-4F71-AEC4-DD6847F8C61C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AFB49A0-E54A-4F71-AEC4-DD6847F8C61C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AFB49A0-E54A-4F71-AEC4-DD6847F8C61C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{39745112-2F69-44F3-9F9C-73BE02264E99} = {ADD926A0-1731-43C4-84F9-EF5B04B71A79}
 		{1214745F-03FE-471A-BB83-00D030A3C984} = {B253C30C-EB42-412F-9F0C-BE46167473E3}
 		{D20D909C-67FB-4D17-ADC3-785ED79AFCFE} = {ADD926A0-1731-43C4-84F9-EF5B04B71A79}
+		{2AFB49A0-E54A-4F71-AEC4-DD6847F8C61C} = {B253C30C-EB42-412F-9F0C-BE46167473E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {085CAF45-62F1-4B30-A1FE-24637905C262}
